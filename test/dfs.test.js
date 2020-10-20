@@ -1,29 +1,4 @@
-import {collectArraysDFS, collectKeysDFS, getPaths} from "../src/dfs"
-
-describe('测试 getPaths 函数', () => {
-  it('可以正确解析', () => {
-    const data = {
-      a: {
-        b: {
-          c: {
-            d: 1
-          }
-        }
-      }
-    }
-
-    const pathName = ['department', 'type', 'employee', 'name']
-
-    const result = getPaths(data, 0, pathName, {}, []);
-
-    expect(result).toEqual([
-      {
-        d: 1,
-        meta: {department: 'a', type: 'b', employee: 'c', name: 'd'}
-      }
-    ]);
-  })
-})
+import {collectArraysDFS, collectKeysDFS} from "../src/dfs"
 
 describe('测试 collectArrayDFS 函数', () => {
   it('可以正确解析', () => {

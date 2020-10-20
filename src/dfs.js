@@ -1,21 +1,3 @@
-export const getTable = (object, step, tempMeta, pathName, table) => {
-  if (!object) {
-    return table.push({
-
-      ...tempMeta
-    });
-  }
-
-  Object.entries(object).forEach(([key, value]) => {
-    tempMeta = {
-      ...tempMeta,
-      [pathName[step]]: key,
-    }
-
-    getTable(value, step + 1, pathName, value, table);
-  });
-}
-
 /**
  * 搜集整个对象里的数组
  */
