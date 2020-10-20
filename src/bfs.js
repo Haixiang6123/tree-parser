@@ -20,41 +20,55 @@ export const getTable = (object, step, tempMeta, pathName, table) => {
  * 搜集整个对象里的数组
  */
 export const collectArrayBFS = (object) => {
-  if (!object) {
-    return [];
-  }
+  if (!object) { return [] }
 
-  if (object instanceof Array) {
-    return object;
-  }
+  let queue = [object];
+  let result = [];
 
-  return Object.values(object).reduce((prev, value) => {
-    if (value instanceof Array) {
-      prev = prev.concat(value);
-    } else if (value instanceof Object) {
-      prev = prev.concat(collectArrayDFS(value));
+  while (queue.length > 0) {
+    const curtNode = queue.pop();
+
+    // 如果是数组，则存起来
+    if (curtNode instanceof Array) {
+      result = result.concat(curtNode);
     }
 
-    return prev;
-  }, []);
+    // 如果还是对象，则继续下一层
+    if (curtNode instanceof Object) {
+      const values = Object.values(curtNode);
+      queue = queue.concat(values);
+    }
+  }
+
+  return result;
 };
 
 /**
  * 获取该层里的所有 key
  */
-export const collectKeys = (object, targetLevel, step) => {
+export const collectKeysBFS = (object, targetLevel, step) => {
   if (!object || targetLevel < step) {
     return [];
   }
 
-  if (step === targetLevel) {
-    return Object.keys(object);
+  let queue = [object];
+  let result = [];
+
+  while (queue.length > 0) {
+    // 到达层数
+    if (step === targetLevel) {
+      result = queue.reduce((prev, curt) => prev.concat(Object.keys(curt)), []);
+    }
+
+    const curtNode = queue.pop();
+
+    if (curtNode instanceof Object) {
+      const values = Object.values(curtNode);
+      queue = queue.concat(values);
+    }
+
+    step += 1;
   }
 
-  return Object.values(object).reduce((prev, value) => {
-    if (value instanceof Object) {
-      prev = prev.concat(collectKeys(value, targetLevel, step + 1));
-      return prev;
-    }
-  }, []);
+  return result;
 };

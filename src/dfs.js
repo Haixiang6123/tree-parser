@@ -20,18 +20,14 @@ export const getTable = (object, step, tempMeta, pathName, table) => {
  * 搜集整个对象里的数组
  */
 export const collectArrayDFS = (object) => {
-  if (!object) {
-    return [];
-  }
+  if (!object) { return [] }
 
-  if (object instanceof Array) {
-    return object;
-  }
+  // 如果本身就是数组，直接返回
+  if (object instanceof Array) { return object }
 
   return Object.values(object).reduce((prev, value) => {
-    if (value instanceof Array) {
-      prev = prev.concat(value);
-    } else if (value instanceof Object) {
+    // 继续递归
+    if (value instanceof Object) {
       prev = prev.concat(collectArrayDFS(value));
     }
 
@@ -43,18 +39,17 @@ export const collectArrayDFS = (object) => {
  * 获取该层里的所有 key
  */
 export const collectKeysDFS = (object, targetLevel, step) => {
-  if (!object || targetLevel < step) {
-    return [];
-  }
+  if (!object || targetLevel < step) { return [] }
 
+  // 到达层数，返回所有 keys
   if (step === targetLevel) {
     return Object.keys(object);
   }
 
+  // 继续递归
   return Object.values(object).reduce((prev, value) => {
     if (value instanceof Object) {
-      prev = prev.concat(collectKeysDFS(value, targetLevel, step + 1));
-      return prev;
+      return prev.concat(collectKeysDFS(value, targetLevel, step + 1));
     }
   }, []);
 };
