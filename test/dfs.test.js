@@ -1,4 +1,29 @@
-import {collectArray, collectKeys} from "./index"
+import {collectArrayDFS, collectKeysDFS, getPaths} from "../src/dfs"
+
+describe('测试 getPaths 函数', () => {
+  it('可以正确解析', () => {
+    const data = {
+      a: {
+        b: {
+          c: {
+            d: 1
+          }
+        }
+      }
+    }
+
+    const pathName = ['department', 'type', 'employee', 'name']
+
+    const result = getPaths(data, 0, pathName, {}, []);
+
+    expect(result).toEqual([
+      {
+        d: 1,
+        meta: {department: 'a', type: 'b', employee: 'c', name: 'd'}
+      }
+    ]);
+  })
+})
 
 describe('测试 collectArray 函数', () => {
   it('可以正确解析', () => {
@@ -24,14 +49,14 @@ describe('测试 collectArray 函数', () => {
       {val: 5}, {val: 6}, {val: 7}, {val: 8}
     ]
 
-    const result = collectArray(data);
+    const result = collectArrayDFS(data);
 
     expect(result).toEqual(expected);
   });
 
   it('测试传入数组的情况', () => {
     const data = [1, 2, 3, 4];
-    const result = collectArray(data);
+    const result = collectArrayDFS(data);
 
     expect(result).toEqual(data);
   })
@@ -46,14 +71,14 @@ describe('测试 collectArray 函数', () => {
       }
     }
 
-    const result = collectArray(data);
+    const result = collectArrayDFS(data);
 
     expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
   })
 
   it('测试空值情况', () => {
     const data = null;
-    const result = collectArray(data);
+    const result = collectArrayDFS(data);
     expect(result).toEqual([]);
   })
 })
@@ -73,14 +98,14 @@ describe('测试 collectKeys 函数', () => {
       }
     }
 
-    const result = collectKeys(data, 2, 1);
+    const result = collectKeysDFS(data, 2, 1);
 
     expect(result).toEqual(['b1', 'b2', 'b3', 'b4'])
   })
 
   it('测试空值', () => {
     const data = null;
-    const result = collectKeys(data, 2, 1);
+    const result = collectKeysDFS(data, 2, 1);
     expect(result).toEqual([]);
   })
 
@@ -93,7 +118,7 @@ describe('测试 collectKeys 函数', () => {
       }
     }
 
-    const result = collectKeys(data, 1, 2);
+    const result = collectKeysDFS(data, 1, 2);
 
     expect(result).toEqual([]);
   })
