@@ -1,4 +1,4 @@
-import {collectArray} from "../utils/object"
+import {collectArray, collectKeys} from "../utils/object"
 
 describe('测试 collectArray 函数', () => {
   it('可以正确解析', () => {
@@ -49,5 +49,26 @@ describe('测试 collectArray 函数', () => {
     const result = collectArray(data);
 
     expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
+  })
+})
+
+describe('测试 collectKeys 函数', () => {
+  it('正常获取所有的 key', () => {
+    const data = {
+      a1: {
+        b1: {},
+        b2: {}
+      },
+      a2: {
+        b3: {},
+        b4: {
+          c: {}
+        }
+      }
+    }
+
+    const result = collectKeys(data, 2, 1);
+
+    expect(result).toEqual(['b1', 'b2', 'b3', 'b4'])
   })
 })

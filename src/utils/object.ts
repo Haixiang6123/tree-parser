@@ -19,7 +19,7 @@ export const collectKeys = (object: Object, depth: number, step: number) => {
     return Object.keys(object);
   }
 
-  return Object.values(object).forEach((prev: any, value: any) => {
+  return Object.values(object).reduce((prev: any, value: any) => {
     if (value instanceof Object) {
       prev = prev.concat(collectKeys(value, depth, step + 1));
       return prev;
