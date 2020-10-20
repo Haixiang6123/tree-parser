@@ -19,7 +19,7 @@ export const getTable = (object, step, tempMeta, pathName, table) => {
 /**
  * 搜集整个对象里的数组
  */
-export const collectArrayBFS = (object) => {
+export const collectArraysBFS = (object) => {
   if (!object) { return [] }
 
   let queue = [object];

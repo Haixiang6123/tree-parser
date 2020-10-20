@@ -1,4 +1,4 @@
-import {collectArrayDFS, collectKeysDFS, getPaths} from "../src/dfs"
+import {collectArraysDFS, collectKeysDFS, getPaths} from "../src/dfs"
 
 describe('测试 getPaths 函数', () => {
   it('可以正确解析', () => {
@@ -49,14 +49,14 @@ describe('测试 collectArrayDFS 函数', () => {
       {val: 5}, {val: 6}, {val: 7}, {val: 8}
     ]
 
-    const result = collectArrayDFS(data);
+    const result = collectArraysDFS(data);
 
     expect(result).toEqual(expected);
   });
 
   it('测试传入数组的情况', () => {
     const data = [1, 2, 3, 4];
-    const result = collectArrayDFS(data);
+    const result = collectArraysDFS(data);
 
     expect(result).toEqual(data);
   })
@@ -71,14 +71,14 @@ describe('测试 collectArrayDFS 函数', () => {
       }
     }
 
-    const result = collectArrayDFS(data);
+    const result = collectArraysDFS(data);
 
     expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
   })
 
   it('测试空值情况', () => {
     const data = null;
-    const result = collectArrayDFS(data);
+    const result = collectArraysDFS(data);
     expect(result).toEqual([]);
   })
 })

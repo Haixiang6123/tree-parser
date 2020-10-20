@@ -19,7 +19,7 @@ export const getTable = (object, step, tempMeta, pathName, table) => {
 /**
  * 搜集整个对象里的数组
  */
-export const collectArrayDFS = (object) => {
+export const collectArraysDFS = (object) => {
   if (!object) { return [] }
 
   // 如果本身就是数组，直接返回
@@ -28,7 +28,7 @@ export const collectArrayDFS = (object) => {
   return Object.values(object).reduce((prev, value) => {
     // 继续递归
     if (value instanceof Object) {
-      prev = prev.concat(collectArrayDFS(value));
+      prev = prev.concat(collectArraysDFS(value));
     }
 
     return prev;
