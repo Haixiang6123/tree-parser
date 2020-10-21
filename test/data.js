@@ -3,8 +3,6 @@ const data = {
     success: {
       text: [
         {name: '张三', content: '你好'},
-        {name: '李四', content: '哈哈哈哈'},
-        {name: '王五', content: 'EZEZ'},
       ],
       audio: [
         {name: '小明', content: '喂喂喂'},
@@ -12,14 +10,9 @@ const data = {
       ]
     },
     fail: {
-      text: [
-        {name: '张三', content: 'Yoyoyo'},
-        {name: '李四', content: 'yeyeye'},
-        {name: '王五', content: 'rerere'},
-      ],
+      text: [],
       audio: [
         {name: '小明', content: '失败了哦'},
-        {name: '小红', content: '你好呀'},
       ]
     },
     sending: {
@@ -35,34 +28,22 @@ const data = {
   },
   '2020-10-11': {
     success: {
-      text: [
-        {name: '张三', content: 'faker'},
-        {name: '李四', content: 'internet'},
-        {name: '王五', content: 'Rusty'},
-      ],
-      audio: [
-        {name: '小明', content: 'randomEmail'},
-        {name: '小红', content: 'Methods'},
-      ]
+      text: [],
+      audio: []
     },
     fail: {
       text: [
         {name: '张三', content: 'streetAddress'},
-        {name: '李四', content: 'currencyName'},
-        {name: '王五', content: 'ethereumAddress'},
       ],
       audio: [
         {name: '小明', content: 'transactionDescription'},
-        {name: '小红', content: 'branch'},
       ]
     },
     sending: {
       text: [
         {name: '张三', content: 'adjective'},
-        {name: '李四', content: 'verb'},
       ],
       audio: [
-        {name: '小明', content: 'regexpStyleStringParse'},
         {name: '小红', content: 'contextualCard'},
       ]
     }
