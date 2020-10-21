@@ -8,7 +8,7 @@ export const collectArraysBFS = (object) => {
   let result = [];
 
   while (queue.length > 0) {
-    const curtNode = queue.pop();
+    const curtNode = queue.shift();
 
     // 如果是数组，则存起来
     if (curtNode instanceof Array) {
@@ -42,7 +42,7 @@ export const collectKeysBFS = (object, targetLevel, step) => {
       result = queue.reduce((prev, curt) => prev.concat(Object.keys(curt)), []);
     }
 
-    const curtNode = queue.pop();
+    const curtNode = queue.shift();
 
     if (curtNode instanceof Object) {
       const values = Object.values(curtNode);

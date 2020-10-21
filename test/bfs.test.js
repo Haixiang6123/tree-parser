@@ -53,7 +53,7 @@ describe('测试 collectArraysBFS 函数', () => {
 
   it('测试空值情况', () => {
     const data = null;
-    const result = collectArrayBFS(data);
+    const result = collectArraysBFS(data);
     expect(result).toEqual([]);
   })
 })
