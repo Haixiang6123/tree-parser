@@ -1,5 +1,7 @@
 # 为了解析后端数据，我竟然写了个递归？
 
+[![Build Status](https://travis-ci.org/Haixiang6123/tree-parser.svg?branch=main)](https://travis-ci.org/Haixiang6123/tree-parser)
+
 > 代码仓库：https://github.com/Haixiang6123/tree-parser
 > 所写代码都是经过了单元测试的，并不是打个 log 就完事的。
 
