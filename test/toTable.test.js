@@ -2,6 +2,24 @@ import toTable from "../src/toTable";
 import data from "./data";
 
 describe('测试 toTable 函数', () => {
+  it ('测试简单数据', () => {
+    const data = {
+      a: {
+        b: {
+          c: [{ name: 'Jack' }]
+        }
+      }
+    }
+    const names = ['date', 'status', 'type', 'data'];
+    const expected = [
+      {date: 'a', status: 'b', type: 'c', data: { name: 'Jack' }}
+    ];
+
+    const result = toTable(data, names);
+
+    expect(result).toEqual(expected);
+  })
+
   it('正确转成数组', () => {
     const expected = [
       {
@@ -9,12 +27,6 @@ describe('测试 toTable 函数', () => {
           "content": "你好",
           "name": "张三"
         },
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
         "date": "2020-10-10",
         "status": "success",
         "type": "text"
@@ -38,28 +50,10 @@ describe('测试 toTable 函数', () => {
         "type": "text"
       },
       {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
         "data": {
           "content": "失败了哦",
           "name": "小明"
         },
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
         "date": "2020-10-10",
         "status": "success",
         "type": "text"
@@ -83,18 +77,6 @@ describe('测试 toTable 函数', () => {
         "type": "text"
       },
       {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
         "data": {
           "content": "在弄了",
           "name": "小明"
@@ -113,28 +95,10 @@ describe('测试 toTable 函数', () => {
         "type": "text"
       },
       {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
         "data": {
           "content": "streetAddress",
           "name": "张三"
         },
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
         "date": "2020-10-10",
         "status": "success",
         "type": "text"
@@ -149,12 +113,6 @@ describe('测试 toTable 函数', () => {
         "type": "text"
       },
       {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
         "data": {
           "content": "adjective",
           "name": "张三"
@@ -164,22 +122,10 @@ describe('测试 toTable 函数', () => {
         "type": "text"
       },
       {
-        "data": "0",
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
         "data": {
           "content": "contextualCard",
           "name": "小红"
         },
-        "date": "2020-10-10",
-        "status": "success",
-        "type": "text"
-      },
-      {
-        "data": "0",
         "date": "2020-10-10",
         "status": "success",
         "type": "text"

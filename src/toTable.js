@@ -8,13 +8,11 @@ const dfsHelper = (object, names, step, tempRow, result) => {
   const keyName = names[step];
 
   if (object instanceof Array) {
-    object.map(item => {
-      const row = {
+    return object.map(item => {
+      result.push({
         ...tempRow,
         [keyName]: item,
-      }
-
-      result.push(row);
+      });
     })
   }
 
