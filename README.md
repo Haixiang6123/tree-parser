@@ -1,6 +1,5 @@
-# 为了解析后端数据，我竟然写了个递归？
-
 > 代码仓库：https://github.com/Haixiang6123/tree-parser
+> 所写代码都是经过了单元测试的，并不是打个 log 就完事的。
 
 曾经的我特别讨厌 LeetCode 算法题，当时就觉得写项目好玩，算法没什么用。不喜欢归不喜欢，为了面试，还是写了 476 道题 = =。非常感激默默地刷题的那段时光，在处理数据方面确实给了我不一样的思路。算法和数据结构果然还是基本功呀。
 
@@ -196,10 +195,76 @@ const collectArraysBFS = (object) => {
 };
 ```
 
+## 另一种思路
+
+另一种我想到的思路是将上面的树状结构变回数据表那样的 Table 结构，即数组：
+
+```json
+[
+  { date: 'xxx', status: 'xxx', type: 'xxx', data: {...} }
+]
+```
+
+有了这个表结构，过滤数组这个需求就会变得更加简单，不再需要上面的BFS或者DFS了：
+
+```js
+// 直接选出所有 date 为 'xxx' 的数据
+table.filter(item => item.date === 'xxx')
+```
+
+要变成 Table 结构，很简单的一个想法就是要求出原始数据里的每条 root 到 leaf 的 path，同时对每个 key 都设定一个名字，这里就叫 keyName，对象里的 key 反而变成了 value，可以参考 [LeetCode 这道题](https://leetcode.com/problems/binary-tree-paths/)。
+
+思路就是我们先要给定每个 key 对应的 keyName 数组，每到一层的时候获取这个 key，以及 keyName 就好了。到最后一层就直接包住最后一层的对象即可完成该次递归。下面直接展示我的解法吧：
+
+```js
+// Helper 函数
+const dfsHelper = (object, names, step, tempRow, result) => {
+  // 异常值的情况
+  if (!object) return;
+
+  // 如果超过 names 长度，则开始搜集结果
+  if (step === names.length) {
+    return result.push({ ...tempRow });
+  }
+
+  // 获取对应的 key 的名字
+  const keyName = names[step];
+
+  // 如果值为数组，则直接 push 数组里的每个元素
+  if (object instanceof Array) {
+    return object.map(item => {
+      result.push({
+        ...tempRow,
+        [keyName]: item,
+      });
+    })
+  }
+
+  const [key] = Object.keys(object);
+  const values = Object.values(object);
+
+  // 复制一份临时的对象
+  tempRow = { ...tempRow, [keyName]: key };
+
+  // 继续下一层的递归
+  values.forEach((value => {
+    dfsHelper(value, names, step + 1, tempRow, result);
+  }))
+}
+
+const toTable = (object, names) => {
+  if (!object) return [];
+
+  let result = [];
+
+  dfsHelper(object, names, 0, {}, result);
+
+  return result;
+}
+```
+
 ## 最后
 
-看到这，可能会有人说：这种代码以后会很难维护，不好看懂，过度优化等等等等。
-
-这里只是提供另一种思路。想想如果都是一层一层 for loop 来解析数据，那业务代码就会变得特别多且冗余，而这种比较抽象的工具函数却可以应对下一次相同数据结构。
+这次的思考给我的感受就是算法虽然在平时项目没什么用，但是在解决基础底层问题的时候确实可以考验一个程序员的基本素养，会给自己不一样的解决思路。
 
 （完）
