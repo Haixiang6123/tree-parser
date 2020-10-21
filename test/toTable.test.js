@@ -20,6 +20,25 @@ describe('测试 toTable 函数', () => {
     expect(result).toEqual(expected);
   })
 
+  it('测试都为对象的情况', () => {
+    const data = {
+      a: {
+        b: {
+          c: {
+            d: 1
+          }
+        }
+      }
+    };
+
+    const names = ['date', 'status', 'type', 'data'];
+    const expected = [
+      {date: 'a', status: 'b', type: 'c', data: 'd'}
+    ]
+    const result = toTable(data, names);
+    expect(result).toEqual(expected);
+  })
+
   it('正确转成数组', () => {
     const expected = [
       {
